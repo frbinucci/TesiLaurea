@@ -1,0 +1,22 @@
+#Questo è un esempio di file di configurazione. Queste sono righe di commento.
+#Vogliamo ottenere la seguente configurazione di rete:
+#1)Interfaccia enp0s3
+# - Vogliamo assegnare un indirizzo IPv6.
+# - Vogliamo assegnare dinamicamente l'indirizzo IPv4.
+#2)Interfaccia enp0s8
+# - Non vogliamo una configurazione IPv6.
+# - Indirizzo IPv4 assegnato tramite DHCP.
+
+#Ogni parametro viene indicato con una notazione chiave=valore. I parametri sono tra loro separati da ';'
+#Il carattere '$' denota la fine della configurazione di una specifica interfaccia di rete. 
+#Se non sono specificati, il dhcp4  e il dhcp6 si assumono disattivati di default.
+nome_interfaccia=enp0s3;
+configurazionev6=true;
+dhcp4=true;
+
+#Questo campo denota gli indirizzi IP dell'interfaccia. Occorre inserire prima l'indirizzio IPv4 poi l'indirizzo Ipv6, separati da una virgola.
+indirizzi_ip=,2001:bc8::1/64$
+
+
+nome_interfaccia=enp0s8;
+dhcp4=true$
