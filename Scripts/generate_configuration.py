@@ -1,25 +1,30 @@
 import sys
 import os
+import configparser
 from validation_functions import *
 
+#_____________________________________________________________________________________________________________________________________________________
+#FUNZIONE PRINCIPALE
+#_____________________________________________________________________________________________________________________________________________________
 def main():
+	#Lo script riceve come parametro la locazione su cui memorizzazare il file di configurazione. Nell'ipotesi in cui essa sia errata, il file di configurazione sarà
+	#generato della medesima directory in cui è contenuto lo script.
 	file_path = ''
 	if len(sys.argv)>1:
 		if os.path.isdir(sys.argv[1]):
 			file_path = sys.argv[1]+"/"
+		else:
+			print("<WARN>: Il percorso specificato non sembra essere corretto. Il file di configurazione sarà generato nella medesima directory dello script...\n")
 
 	print("Benvenuti nello strumento di generazione automatica del file di configurazione!")
 	print("Questo tool consente di generare automaticamente il file necessario alla configurazione delle diverse interfacce presenti sulla macchina.")
 	print("\n")
 	number_interfaces = int(input("Quante interfacce si vogliono configurare? "))
 	print("\n")
-
-	f=open(file_path+"configuration.txt","w+")
-	f.write("")
-	f.close()
-
-	f=open(file_path+"configuration.txt","a+")
-
+	
+	#Generazione dell'oggetto necessario alla gestione del file di configurazione
+	out_config = configparser.RawConfigParser()
+	
 	for i in range(0,number_interfaces):
 
 		cfgv6 = ''
@@ -105,28 +110,19 @@ def main():
 					print("\nErrore! A quanto pare è stato inserito un prefisso (IPv6) NON valido")
 					print("Si ricorda che il prefisso deve essere un intero compreso tra 1 e 64\n")
 					prefix = str(input("Specificare il numero di bit di prefisso (IPv6): "))
-					check_prefix = validate_prefix(prefix,1,32)
-
-
-				gateway6 = str(input("Inserire l'indirizzo IPv6 del gateway: "))
-				check_ip = validate_ipv6_address(gateway6)
-
-				while check_ip==False:
-					print("\nErrore! A quanto pare è stato inserito un indirizzo Ipv6 NON valido! Riprovare\n")
-					gateway6 = str(input("Inserire indirizzo IPv6 del gateway:"))
-					check_ip = validate_ipv6_address(gateway6)
+					check_prefix = validate_prefix(prefix,1,64)
 				ipv6=ipv6+"/"+prefix
-
-		f.write("nome_interfaccia="+interface_name+";\n")
-		f.write("configurazionev6="+cfgv6+";\n")
-		f.write("dhcp4="+dhcp4+";\n")
-		f.write("dhcp6="+dhcp6+";\n")
-		f.write("indirizzi="+ipv4+","+ipv6+";\n")
-		f.write("gateway="+gateway4+","+gateway6+";\n")
-		f.write("dns=")
+		out_config.add_section(interface_name)
+		out_config.set(interface_name,"valid","true")
+		out_config.set(interface_name,"configurazionev6",cfgv6)
+		out_config.set(interface_name,"dhcp4",dhcp4)
+		out_config.set(interface_name,"dhcp6",dhcp6)
+		out_config.set(interface_name,"indirizzi",ipv4+","+ipv6)
+		out_config.set(interface_name,"gateway",gateway4)
 
 		if (dhcp6=='false' or dhcp4=='false'):
 			dns_check = ''
+			dns_list = []
 			while(dns_check!='y' and dns_check!='n'):
 				dns_check = str(input("Si vuole specificare una lista di server dns? (Y/N): ")).lower()
 			if dns_check=='y':
@@ -136,23 +132,16 @@ def main():
 					current_server = str(input("Inserire l'indirizzo del prossimo server DNS ('#' per interrompere l'inserimento): "))
 					if current_server!='#':
 						dns_list.append(current_server)
-
-				count_server = 1
-
-				for dns in dns_list:
-					f.write(dns)
-					if count_server != len(dns_list):
-						f.write(",")
-					count_server+=1
 			else:
-				f.write("8.8.8.8")
-		if i!=number_interfaces-1:
-			f.write("$\n")
+				dns_list.append('8.8.8.8')
 
+			out_config.set(interface_name,"dns",(','.join(dns_list)))
 		print("\n")
-
-
-	f.close()
+		
+		
+	with open(file_path+'config.cfg', 'w') as configfile:
+    		out_config.write(configfile)
+#__________________________________________________________________________________________________________________________________
 
 if __name__=="__main__":
 	main()
