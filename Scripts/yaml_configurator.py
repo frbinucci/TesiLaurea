@@ -12,6 +12,8 @@ f = open("/etc/netplan/50-cloud-init.yaml","a+")
 
 for interface in config.sections():
 	if config[interface]['valid'] == "true":
+
+		only_eth_config = False
 	
 		interface_name = interface
 		v6_config = config[interface]['configurazionev6']
@@ -31,26 +33,30 @@ for interface in config.sections():
     
 		if dhcp4!="true":
 		    ipv4 = ip_addresses.split(",")[0]
-		    f.write("            - "+ipv4+"\n")    
+		    if ipv4=="":
+		    	f.write("            - "+"FE80::1/10"+"\n")
+		    	only_eth_config = True
+		    else:
+		    	f.write("            - "+ipv4+"\n")    
 
-		if v6_config == "true":
+		if v6_config == "true" and only_eth_config == False:
 			if dhcp6!="true":
 				if len(ip_addresses.split(","))>1:
 					ipv6 = ip_addresses.split(",")[1]
 					f.write("            - "+ipv6+"\n")
 			f.write("            "+"dhcp6: "+dhcp6+"\n") 
-
-		f.write("            "+"dhcp4: "+dhcp4+"\n") 
+		if only_eth_config == False:
+			f.write("            "+"dhcp4: "+dhcp4+"\n") 
 		#____________________________________________
 		#Scrittura parametri inerenti il gateway
 		#____________________________________________
-		if dhcp4!='true':
+		if dhcp4!='true' and only_eth_config== False and gateway!="":
 		    f.write("            "+"gateway4: ")
 		    f.write(gateway+"\n")
 		#____________________________________________
 		#Scrittura parametri inerenti il DNS
 		#____________________________________________
-		if dhcp4!='true' or (dhcp6!='true' and v6_config=="true"):
+		if (dhcp4!='true' or (dhcp6!='true' and v6_config=="true")) and only_eth_config== False:
 		    dns_list = dns.split(",")
 		    f.write("            "+"nameservers:"+"\n")
 		    f.write("                 addresses: ")
@@ -60,3 +66,8 @@ for interface in config.sections():
 		        f.write("                 - "+dns_server+"\n")
 		    
 f.close()
+		
+
+
+
+
