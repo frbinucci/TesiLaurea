@@ -3,18 +3,25 @@ import configparser
 # Copy input to output
 output_table = input_table.copy()
 
+#Ottenimento del percorso assoluto del file di configurazione.
 path_config_file = path_config_files = flow_variables['context.workflow.absolute-path']+"/ConfigurationFiles/config.cfg"
 
+#Generazione dell'oggetto che rappresenza il file di configurazione.
 config = configparser.RawConfigParser()
 config.read(path_config_file)
 
+#Apertura del file yaml contenente la configurazione delle interfacce di rete.
 f = open("/etc/netplan/50-cloud-init.yaml","a+")
 
+#__________________________________________________________
+#CONFIGURAZIONE DELLE INTERFACCE
+#Lo script assume che il file su cui si opera non contenga
+#dati inconsistenti.
 for interface in config.sections():
+	#Verifica della validità della configurazione dell'interfaccia
 	if config[interface]['valid'] == "true":
 
 		only_eth_config = False
-	
 		interface_name = interface
 		v6_config = config[interface]['configurazionev6']
 		dhcp4 = config[interface]['dhcp4']
@@ -34,7 +41,7 @@ for interface in config.sections():
 		if dhcp4!="true":
 		    ipv4 = ip_addresses.split(",")[0]
 		    if ipv4=="" and v6_config=="false":
-		    	f.write("            - "+"FE80::1/10"+"\n")
+		    	f.write("            - "+ip_addresses.split(",")[1]+"\n")
 		    	only_eth_config = True
 		    elif ipv4!="":
 		    	f.write("            - "+ipv4+"\n")    
@@ -67,7 +74,5 @@ for interface in config.sections():
 		    
 f.close()
 		
-
-
 
 
