@@ -33,10 +33,10 @@ for interface in config.sections():
     
 		if dhcp4!="true":
 		    ipv4 = ip_addresses.split(",")[0]
-		    if ipv4=="":
+		    if ipv4=="" and v6_config=="false":
 		    	f.write("            - "+"FE80::1/10"+"\n")
 		    	only_eth_config = True
-		    else:
+		    elif ipv4!="":
 		    	f.write("            - "+ipv4+"\n")    
 
 		if v6_config == "true" and only_eth_config == False:
