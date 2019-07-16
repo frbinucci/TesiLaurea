@@ -38,7 +38,7 @@ for interface in config.sections():
 				if len(ip_addresses.split(","))>1:
 					ipv6 = ip_addresses.split(",")[1]
 					f.write("            - "+ipv6+"\n")
-					f.write("            "+"dhcp6: "+dhcp6+"\n") 
+			f.write("            "+"dhcp6: "+dhcp6+"\n") 
 
 		f.write("            "+"dhcp4: "+dhcp4+"\n") 
 		#____________________________________________
@@ -60,9 +60,3 @@ for interface in config.sections():
 		        f.write("                 - "+dns_server+"\n")
 		    
 f.close()
-		
-
-
-
-
-
