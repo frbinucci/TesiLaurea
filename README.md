@@ -3,6 +3,7 @@
 Questo repository contiene tutti gli script necessari al funzionamento di un flusso KNIME utile alla configurazione di un servizio di rete virtuale. 
 Allo stato attuale sono state implementate solo le funzioni utili alla configurazione delle interfacce di rete in Ubuntu 18.04 LTS a partire da una descrizione
 fornita dall'utente mediante un apposito file di configurazione.
+{: style="text-align: justify"}
 
 ## ISTRUZIONI DI UTILIZZO
 
