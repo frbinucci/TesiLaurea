@@ -10,6 +10,16 @@ Per poter testare l'applicativo è necessario avere installato KNIME. All'intern
 Una volta importato il flusso, per testarne il funzionamento, è necessario recarsi nella directory "ConfigurationFiles", posta all'interno della directory del flusso.
 All'interno di tale cartella è presente un file, chiamato "config.cfg", nel quale viene fornita la configurazione dell'interfaccia di rete.
 
+### PRIMA DI PROCEDERE
+
+Per poter utilizzare il flusso generato occorre disabilitare la richiesta della password per l'esecuzione del comando sudo. Per fare ciò è sufficiente eseguire le seguenti operazioni:
+
+* Aprire il terminare e digitare il comando sudo visudo.
+* Aggiungere al file sudoers la seguente stringa: username ALL=(ALL) NOPASSWD:ALL
+
+Si precisa che, ovviamente, al posto di "username" occorre indicare il proprio nome utente.
+
+
 ### ISTRUZIONI PER LA FORMATTAZIONE DEL FILE
 
 Viene qui riportata, a titolo di esempio, la struttura del file di configurazione
@@ -38,3 +48,9 @@ Non è necessario definire tutti i parametri precedentemente elencati. Inoltre l
 * Se non si specifica alcun parametro di configurazione, si assume che si voglia configurare l'interfaccia come se fosse di strato 2. In tal caso viene ad essa assegnato un indirizzo IPv6 della classe link local.
 
 
+### ISTRUZIONI DI UTILIZZO DELLO SCRIPT "generate_configuration.py"
+
+Viene messo a disposizione dell'utente anche un apposito script, denominato "generate_configuration.py", il quale fornisce una procedura guidata del file di configurazione. Il suddesso script riceve come
+parametro il percorso del file di configurazione da esso generato. 
+Nell'ipotesi in cui l'utente non specifichi alcun percorso, o specifichi un percorso non valido, lo script provvede a generare il file nella medesima directory su cui viene lanciato. Si consiglia di lanciare lo script
+passando come parametro il percorso assoluto della directory ConfigurationFiles, posta all'interno della directory contenente il flusso KNIME.
