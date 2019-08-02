@@ -61,9 +61,11 @@ passando come parametro il percorso assoluto della directory ConfigurationFiles,
 
 Questo flusso è ancora in fase di costruzione. Maggiori informazioni saranno fornite non appena le funzionalità salienti saranno implementate.
 
-###CONFIGURAZIONE DI UN VNFD
+### CONFIGURAZIONE DI UN VNFD
 
+Under Construction...
 
-###CONFIGURAZIONE DI UN NSD
+### CONFIGURAZIONE DI UN NSD
 
+Under Construction...
 
