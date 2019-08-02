@@ -1,12 +1,14 @@
 # TesiLaurea
 
 Questo repository contiene tutti gli script necessari al funzionamento di un flusso KNIME utile alla configurazione di un servizio di rete virtuale. 
-Allo stato attuale sono state implementate solo le funzioni utili alla configurazione delle interfacce di rete in Ubuntu 18.04 LTS a partire da una descrizione
-fornita dall'utente mediante un apposito file di configurazione.
+Allo stato attuale sono state implementate le seguenti funzionalità:
 
-## ISTRUZIONI DI UTILIZZO
+1)Configurazione delle interfacce di rete mediante il file "50-cloud-init.yaml" sul sistema operativo Ubuntu 18.04
+2)Configurazione del descrittore relativo ad una VNF (Virtualized Network Function) (funzionalità da migliorare).
 
-Per poter testare l'applicativo è necessario avere installato KNIME. All'interno della cartella "flows" è presente il file contenente il flusso da importare.
+## ISTRUZIONI DI UTILIZZO DEL FLUSSO RELATIVO ALLA CONFIGURAZIONE DELLE INTERFACCE DI RETE
+
+Per poter testare l'applicativo è necessario avere installato KNIME. All'interno della cartella "flows" è presente il file contenente il pacchetto dei flussi.
 Una volta importato il flusso, per testarne il funzionamento, è necessario recarsi nella directory "ConfigurationFiles", posta all'interno della directory del flusso.
 All'interno di tale cartella è presente un file, chiamato "config.cfg", nel quale viene fornita la configurazione dell'interfaccia di rete.
 
@@ -54,3 +56,14 @@ Viene messo a disposizione dell'utente anche un apposito script, denominato "gen
 parametro il percorso del file di configurazione da esso generato. 
 Nell'ipotesi in cui l'utente non specifichi alcun percorso, o specifichi un percorso non valido, lo script provvede a generare il file nella medesima directory su cui viene lanciato. Si consiglia di lanciare lo script
 passando come parametro il percorso assoluto della directory ConfigurationFiles, posta all'interno della directory contenente il flusso KNIME.
+
+## ISTRUZIONI DI UTILIZZO DEL FLUSSO RELATIVO ALLA CONFIGURAZIONE DEI SERVIZI DI RETE VIRTUALI
+
+Questo flusso è ancora in fase di costruzione. Maggiori informazioni saranno fornite non appena le funzionalità salienti saranno implementate.
+
+###CONFIGURAZIONE DI UN VNFD
+
+
+###CONFIGURAZIONE DI UN NSD
+
+

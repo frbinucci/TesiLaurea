@@ -1,3 +1,5 @@
-Scripts/__pycache__
-Scripts/config.cfg
+Scripts/Netplan_Configurator/__pycache__
+Scripts/Netplan_Configurator/config.cfg
+Scripts/NFV_Configurator/VNF_Descriptor/__pycache__
+
 *.swp
