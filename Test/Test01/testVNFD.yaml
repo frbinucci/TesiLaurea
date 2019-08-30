@@ -1,0 +1,30 @@
+vnfd:vnfd-catalog:
+    vnfd:
+    -   id: hackfest_basic-vnf
+        name: hackfest_basic-vnf
+        short_name: hackfest_basic-vnf
+        version: '1.0'
+        logo: osm.png
+        description: Semplice esempio di VNF contente un solo VDU
+        connection-point:
+        -   id: vnf-cp0
+            name: vnf-cp0
+            short_name: vnf-cp0
+        mgmt-interface:
+            cp: vnf-cp0
+        vdu:
+        -   id: hackfest_basic-VM
+            name: hackfest_basic-VM
+            image: ubuntu1604
+            count: '1'
+            vm-flavor: 
+               vcpu-count: '1'
+               memory-mb: '1024'
+               storage-gb: '10'
+            interface: 
+            -   name: vdu-eth0
+                position: '1'
+                type: EXTERNAL
+                virtual-interface: 
+                    type: PARAVIRT
+                external-connection-point-ref: vnf-cp0
