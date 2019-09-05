@@ -42,7 +42,7 @@ def main():
 				if shared=='true':
 					f.write("         is-shared-nss: "+"'"+shared+"'"+"\n")
 				else:
-					f.write("         is-shaered-nss: 'false'"+"\n")
+					f.write("         is-shared-nss: 'false'"+"\n")
 
 				if description!=None:
 					f.write("         description: "+description+"\n")

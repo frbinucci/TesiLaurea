@@ -26,7 +26,7 @@ def main():
 		vnf_section = re.findall('.*vnf.*',section.lower())
 		if len(vnf_section)!=0:
 			index_counter = 1
-			f.write("        costituent-vnfd:"+"\n")
+			f.write("        constituent-vnfd:"+"\n")
 			for vnfd in config[section]:
 				options = config[section][vnfd]
 				print(options)

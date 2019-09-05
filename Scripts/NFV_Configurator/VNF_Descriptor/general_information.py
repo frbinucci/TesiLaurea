@@ -5,8 +5,8 @@ import sys
  
 # Create empty table
 output_table = DataFrame()
-path_config_files = flow_variables['context.workflow.absolute-path']+"/ConfigurationFiles/VNFDescriptors.cfg"
-path_output_files = flow_variables['context.workflow.absolute-path']+"/OutputFiles"
+path_config_files = flow_variables['config_vnf']
+path_output_files = flow_variables['vnf_descriptor']
 path_lib = flow_variables['context.workflow.absolute-path']+"/Libraries"
 
 sys.path.insert(0,path_lib)
@@ -16,9 +16,9 @@ from key_checker import *
 def main():
 
 
-	f = open(path_output_files+'/descriptorTest.yaml',"w+")
+	f = open(path_output_files,"w+")
 	f.close()
-	f = open(path_output_files+'/descriptorTest.yaml',"a+")
+	f = open(path_output_files,"a+")
 	f.write('vnfd:vnfd-catalog:'+"\n")
 	f.write('    vnfd:'+"\n")
 	
@@ -29,7 +29,7 @@ def main():
 	#a tutte le sezioni presenti nell'apposito file
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI GENERALI SUL SERVIZIO
+		#SCRITTURA DELLE INFORMAZIONI GENERALI SULLA FUNZIONE DI RETE VIRTUALIZZATA
 		general_section = re.findall('.*general.*',section.lower())
 		if len(general_section)!=0:
 			options = config[section]
@@ -38,14 +38,18 @@ def main():
 			short_name = key_checker(options,'.*short.*|.*corto.*|.*alias.*') 
 			version = key_checker(options,'.*version.*') 
 			logo = key_checker(options,'.*logo.*') 
-			description = ",".join(key_checker(options,'.*desc.*'))
+
+			description = key_checker(options,'.*desc.*')
+
+			if type(description)==list:
+				description = ",".join(description)
 			
 			if id!=None:
 				f.write("    -   id: "+id+"\n")
 			if name!=None:
 				f.write("        name: "+name+"\n")
 			if short_name!=None:
-				f.write("        short_name: "+short_name+"\n")
+				f.write("        short-name: "+short_name+"\n")
 			if version!=None:
 				f.write("        version: "+"'"+version+"'"+"\n")
 			if logo!=None:
