@@ -2,11 +2,11 @@ nsd:nsd-catalog:
     nsd:
     -   id: hackfest_basic-ns
         name: hackfest_basic-ns
-        short_name: hackfest_basic-ns
+        short-name: hackfest_basic-ns
         version: '1.0'
         logo: osm.png
         description: Esempio di NS dotato di singla VNF
-        costituent-vnfd:
+        constituent-vnfd:
         -   vnfd-id-ref: hackfest_basic-vnf
             member-vnf-index: '1'
         vld:

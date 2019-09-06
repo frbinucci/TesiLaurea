@@ -2,7 +2,7 @@ vnfd:vnfd-catalog:
     vnfd:
     -   id: hackfest_basic-vnf
         name: hackfest_basic-vnf
-        short_name: hackfest_basic-vnf
+        short-name: hackfest_basic-vnf
         version: '1.0'
         logo: osm.png
         description: Semplice esempio di VNF contente un solo VDU
