@@ -1,0 +1,37 @@
+nst:
+-    id: slice_hackfest_nst
+     name: slice_hackfest_nst
+     SNSSAI-identifier:
+         slice-service-type: eMBB
+     quality-of-service: 
+         id: 1
+
+     netslice-subnet: 
+     -   id: slice_hackfest_nsd_1
+         is-shared-nss: 'false'
+         description: NetSlice Subnet (service) composed by 2 vnfs and 4 cp (2 mgmt and 2 data)
+         nsd-ref: slice_hackfest_nsd
+     -   id: slice_hackfest_nsd_2
+         is-shared-nss: 'false'
+         description: NetSlice Subnet (service) composed by 2 vnfs and 4 cp (2 mgmt and 2 data)
+         nsd-ref: slice_hackfest_nsd
+
+     netslice-vld: 
+     -   id: slice_hackfest_vld_mgmt
+         name: slice_hackfest_vld_mgmt
+         type: ELAN
+         mgmt-network: 'true'
+         nss-connection-point-ref:
+         -   nss-ref: slice_hackfest_nsd_1
+             nsd-connection-point-ref: nsd_cp_mgmt
+         -   nss-ref: slice_hackfest_nsd_2
+             nsd-connection-point-ref: nsd_cp_mgmt
+     -   id: slice_hackfest_vld_data
+         name: slice_hackfest_vld_mgmt
+         type: ELAN
+         nss-connection-point-ref:
+         -   nss-ref: slice_hackfest_nsd_1
+             nsd-connection-point-ref: nsd_cp_data
+         -   nss-ref: slice_hackfest_nsd_2
+             nsd-connection-point-ref: nsd_cp_data
+
