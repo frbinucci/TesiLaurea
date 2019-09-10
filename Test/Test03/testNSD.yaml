@@ -1,0 +1,43 @@
+nsd:nsd-catalog:
+    nsd:
+    -   id: hackfest_multivdu-ns
+        name: hackfest_multivdu-ns
+        short-name: hackfest_multivdu-ns
+        version: '1.0'
+        logo: osm.png
+        description: Esempio di NS consistente di 2 VNF interconnesse
+        constituent-vnfd:
+        -   vnfd-id-ref: hackfest_multivdu-vnf
+            member-vnf-index: '1'
+        -   vnfd-id-ref: hackfest_multivdu-vnf
+            member-vnf-index: '2'
+        connection-point:
+        -   name: nsd_cp_mgmt
+            vld-id-ref: mgmnet
+        -   name: nsd_cp_data
+            vld-id-ref: datanet
+        vld:
+        -   id: mgmtnet
+            name: mgmtnet
+            short-name: mgmtnet
+            type: ELAN
+            mgmt-network: 'true'
+            vim-network-name: 'mgmt'
+            vnfd-connection-point-ref:
+            -    vnfd-id-ref: hackfest_multivdu-vnf
+                 member-vnf-index-ref: '1'
+                 vnfd-connection-point-ref: 'vnf-mgmt'
+            -    vnfd-id-ref: hackfest_multivdu-vnf
+                 member-vnf-index-ref: '2'
+                 vnfd-connection-point-ref: 'vnf-mgmt'
+        -   id: datanet
+            name: datanet
+            short-name: datanet
+            type: ELAN
+            vnfd-connection-point-ref:
+            -    vnfd-id-ref: hackfest_multivdu-vnf
+                 member-vnf-index-ref: '1'
+                 vnfd-connection-point-ref: 'vnf-data'
+            -    vnfd-id-ref: hackfest_multivdu-vnf
+                 member-vnf-index-ref: '2'
+                 vnfd-connection-point-ref: 'vnf-data'
