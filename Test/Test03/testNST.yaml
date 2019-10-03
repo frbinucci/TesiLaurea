@@ -10,11 +10,11 @@ nst:
      -   id: slice_hackfest_nsd_1
          is-shared-nss: 'false'
          description: NetSlice Subnet (service) composed by 2 vnfs and 4 cp (2 mgmt and 2 data)
-         nsd-ref: slice_hackfest_nsd
+         nsd-ref: hackfest_multivdu-ns
      -   id: slice_hackfest_nsd_2
          is-shared-nss: 'false'
          description: NetSlice Subnet (service) composed by 2 vnfs and 4 cp (2 mgmt and 2 data)
-         nsd-ref: slice_hackfest_nsd
+         nsd-ref: hackfest_multivdu-ns
 
      netslice-vld: 
      -   id: slice_hackfest_vld_mgmt
