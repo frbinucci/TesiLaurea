@@ -5,7 +5,7 @@ vnfd:vnfd-catalog:
         short-name: hackfest_basic-vnf
         version: '1.0'
         logo: osm.png
-        description: Semplice esempio di VNF contente un solo VDU
+        description: Sample VNF with a single VDU
         connection-point:
         -   id: vnf-cp0
             name: vnf-cp0

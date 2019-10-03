@@ -31,16 +31,12 @@ def main():
 				type = key_checker(options,'.*type.*')
 				connection_points = key_checker(options,'.*points.*')
 				f.write("        -   id: "+current_link+"\n") 
-				
 				if name!=None:
 					f.write("            name: "+name+"\n")
-
 				if short_name!=None:
 					f.write("            short_name: "+short_name+"\n")  
-
 				if type!=None:
 					f.write("            type: "+type+"\n")
-
 				if connection_points!=None:
 					f.write("            internal-connection-point:"+"\n")
 					for current_point in connection_points:
