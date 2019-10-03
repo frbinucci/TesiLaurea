@@ -33,7 +33,6 @@ def main():
 				f.write("        -   id: "+cp+"\n") 
 				if name!=None:
 					f.write("            name: "+name+"\n")
-
 				if short_name!=None:
 					f.write("            short_name: "+short_name+"\n")  
 	f.close()
