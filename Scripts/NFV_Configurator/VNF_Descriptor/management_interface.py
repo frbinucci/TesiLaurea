@@ -20,11 +20,11 @@ def main():
 	#Lettura del file di configurazione.
 	config = ConfigObj(path_config_files)
 	#______________________________________
-	#In questa parte dello script si passa in rassegna 
-	#a tutte le sezioni presenti nell'apposito file
+	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL 
+	#SECTIONS DEFINED INSIDE THE CONFIGURATION FILE
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI GENERALI SUL SERVIZIO
+		#WRITING OF THE INFORMATION ABOUT THE MANAGEMENT INTERFACES
 		management_interface = re.findall('.*management.*',section.lower())
 		if len(management_interface)!=0:
 			management_interface = key_checker(config[section],".*id.*|.*int.*")

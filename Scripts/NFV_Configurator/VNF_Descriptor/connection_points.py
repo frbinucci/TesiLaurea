@@ -18,19 +18,19 @@ def main():
 	config = ConfigObj(path_config_files)
 	f = open(path_output_files+"/descriptorTest.yaml","a+")
 	#______________________________________
-	#In questa parte dello script si passa in rassegna 
-	#a tutte le sezioni presenti nell'apposito file
+	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL SECTION
+	#DEFINED INSIDE THE CONFIGURATION FILE
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI RELATIVE AI PUNTI DI CONNESSIONE
-		connection_point = re.findall('.*connessione.*|.*punti.*|.*points.*|.*connection.*',section.lower())
+		#WRITING OF THE INFORMATION ABOUT THE CONNECTION POINTS
+		connection_point = re.findall('.*points.*|.*connection.*',section.lower())
 		if len(connection_point)!=0:
 			f.write("        connection-point:"+"\n")
 			for cp in config[section]:
 				options = config[section][cp]
 				print(options)
-				name = key_checker(options,'.*name.*|.*nome.*')
-				short_name = key_checker(options,'.*short.*|.*corto.*')
+				name = key_checker(options,'.*name.*')
+				short_name = key_checker(options,'.*short.*|.*alias.*')
 				f.write("        -   id: "+cp+"\n") 
 				
 				if name!=None:

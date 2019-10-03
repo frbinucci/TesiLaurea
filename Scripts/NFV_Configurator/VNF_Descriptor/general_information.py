@@ -22,20 +22,20 @@ def main():
 	f.write('vnfd:vnfd-catalog:'+"\n")
 	f.write('    vnfd:'+"\n")
 	
-	#Lettura del file di configurazione.
+	#READING OF THE CONFIGURATION FILE.
 	config = ConfigObj(path_config_files)
 	#______________________________________
-	#In questa parte dello script si passa in rassegna 
-	#a tutte le sezioni presenti nell'apposito file
+	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL 
+	#SECTIONS DEFINED INSIDE THE CONFIGURATION FILE
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI GENERALI SULLA FUNZIONE DI RETE VIRTUALIZZATA
+		#WRITING OF THE GENERAL INFORMATION ABOUT THE VIRTUALIZED NETWORK FUNCTION
 		general_section = re.findall('.*general.*',section.lower())
 		if len(general_section)!=0:
 			options = config[section]
 			id = key_checker(options,'.*id.*')
 			name = key_checker(options,'.*name.*|.*nome.*')
-			short_name = key_checker(options,'.*short.*|.*corto.*|.*alias.*') 
+			short_name = key_checker(options,'.*short.*|.*alias.*') 
 			version = key_checker(options,'.*version.*') 
 			logo = key_checker(options,'.*logo.*') 
 

@@ -17,20 +17,20 @@ def main():
 	config = ConfigObj(path_config_files)
 	f = open(path_output_files+"/descriptorTest.yaml","a+")
 	#______________________________________
-	#In questa parte dello script si passa in rassegna 
-	#a tutte le sezioni presenti nell'apposito file
+	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL 
+	#SECTIONS DEFINED INSIDE THE CONFIGURATION FILE
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI RELATIVE AI PUNTI DI CONNESSIONE
-		internal_vld_information = re.findall('.*internal.*|.*interno.*|.*vld.*',section.lower())
+		#WRITING OF THE INFORMATION ABOUT THE INTERNAL VIRTUAL LINKS
+		internal_vld_information = re.findall('.*internal.*|.*vld.*',section.lower())
 		if len(internal_vld_information)!=0:
 			f.write("        internal-vld:"+"\n")
 			for current_link in config[section]:
 				options = config[section][current_link]
 				name = key_checker(options,'.*name.*|.*nome.*')
-				short_name = key_checker(options,'.*short.*|.*corto.*')
-				type = key_checker(options,'.*type.*|.*tipo.*')
-				connection_points = key_checker(options,'.*punti.*|.*points.*')
+				short_name = key_checker(options,'.*short.*|.*alias.*')
+				type = key_checker(options,'.*type.*')
+				connection_points = key_checker(options,'.*points.*')
 				f.write("        -   id: "+current_link+"\n") 
 				
 				if name!=None:

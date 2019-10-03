@@ -21,11 +21,11 @@ def main():
 	config = ConfigObj(path_config_files)
 	f = open(path_output_files+"/descriptorTest.yaml","a+")
 	#______________________________________
-	#In questa parte dello script si passa in rassegna 
-	#a tutte le sezioni presenti nell'apposito file
+	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL 
+	#SECTIONS DEFINED INSIDE THE CONFIGURATION FILE
 	for section in config.dict():
 		#--------------------------------------------
-		#SCRITTURA DELLE INFORMAZIONI RELATIVE AI PUNTI DI CONNESSIONE
+		#WRITING OF THE INFORMATION ABOUT THE VIRTUAL DEPLOYMENT UNITS (VDU)
 		vdu_information = re.findall('.*vdu.*',section.lower())
 		if len(vdu_information)!=0:
 			f.write("        vdu:"+"\n")
@@ -54,7 +54,7 @@ def main():
 					
 						
 				#---------------------------------------------
-				#QUI SONO SCRITTE LE INFORMAZIONI GENERALI
+				#IN THIS PART OF THE SCRIPT WE ARE WRITING THE GENERAL INFORMATION ABOUT THE VDU
 				general_options = config[section][current_vdu]
 				print(general_options)				
 				name = key_checker(config[section][current_vdu],'.*name.*|.*nome.*')
@@ -74,7 +74,7 @@ def main():
 				if count!=None:
 					f.write("            count: "+"'"+count+"'"+"\n")
 				#--------------------------------------------
-				#QUI CI SI OCCUPA DI SCRIVERE LE INFORMAZIONI RELATIVE ALLE CARATTERISTICHE HARDWARE
+				#WRITING OF THE HARDWARE FEATURES OF THE VDU
 				if hardware_features_subsection!=None:
 					f.write("            vm-flavor: "+"\n")
 					number_cpu = key_checker(config[section][current_vdu][hardware_features_subsection],'.*cpu.*|.*number.*|.*processori.*|.*numero.*')
@@ -85,7 +85,7 @@ def main():
 					f.write("               memory-mb: "+"'"+memory+"'"+"\n")
 					f.write("               storage-gb: "+"'"+storage+"'"+"\n")
 				#--------------------------------------------
-				#QUI CI SI OCCUPA DI SCRIVERE LE INFORMAZIONI RELATIVE ALLE INTERFACCE DI RETE
+				#WRITING OF THE NETWORK INTERFACES CONFIGURATION
 				if interfaces_subsection!=None:
 					f.write("            interface: "+"\n")
 
@@ -112,7 +112,7 @@ def main():
 						else:
 							f.write("                external-connection-point-ref: "+connection_ref+"\n")	
 				#--------------------------------------------
-				#QUI CI SI OCCUPA DI SCRIVERE LE INFORMAZIONI RELATIVE AI PUNTI DI CONNESSIONE INTERNI											
+				#WRITING OF THE CONFIGURATION RELATED TO TE INTERNAL CONNECTION POINTS  										
 				if internal_connection_endpoints_subsection!=None:
 					f.write("            internal-connection-point: "+"\n")	
 					
