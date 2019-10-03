@@ -30,8 +30,6 @@ def main():
 		if len(vdu_information)!=0:
 			f.write("        vdu:"+"\n")
 			for current_vdu in config[section]:
-
-				
 				hardware_features_subsection = None
 				interfaces_subsection = None
 				internal_connection_endpoints_subsection = None
@@ -41,18 +39,12 @@ def main():
 					hardware_features = re.findall('.*hardware.*|.*features.*|.*caratteristiche.*',current_subsection,re.IGNORECASE)
 					interfaces = re.findall('.*interfacce.*|.*interfaces.*',current_subsection,re.IGNORECASE)		
 					internal_connection_endpoints = re.findall('.*internal.*|.*connection.*|.*end.*|.*point.*|.*punti.*|.*connessione.*|.*interni.*',current_subsection,re.IGNORECASE)					
-
-					
 					if len(hardware_features)>0:
 						hardware_features_subsection = hardware_features.pop()
-
 					if len(interfaces)>0:
 						interfaces_subsection = interfaces.pop()
-
 					if len(internal_connection_endpoints)>0:
-						internal_connection_endpoints_subsection = internal_connection_endpoints.pop()	
-					
-						
+						internal_connection_endpoints_subsection = internal_connection_endpoints.pop()			
 				#---------------------------------------------
 				#IN THIS PART OF THE SCRIPT WE ARE WRITING THE GENERAL INFORMATION ABOUT THE VDU
 				general_options = config[section][current_vdu]
@@ -61,12 +53,9 @@ def main():
 				image = key_checker(config[section][current_vdu],'.*sistema.*|.*operativo.*|.*immagine.*|.*image.*|.*operating.*|.*system.*')
 				count = key_checker(config[section][current_vdu],'.*numero.*|.*progressivo.*|.*count.*|.*number.*|.*progressive.*')
 				cloud_init_file = key_checker(config[section][current_vdu],'.*cloud.*|.*init.*|.*file.*|.*config.*')
-
 				f.write("        -   id: "+current_vdu+"\n") 
-				
 				if name!=None:
 					f.write("            name: "+name+"\n")
-
 				if image!=None:
 					f.write("            image: "+image+"\n")
 				if cloud_init_file!=None:
@@ -98,9 +87,7 @@ def main():
 							type="INTERNAL"
 						else:
 							type="EXTERNAL"
-
 						f.write("            -   name: "+interface_name+"\n")
-
 						if position!=None:
 							f.write("                position: "+"'"+position+"'"+"\n")
 						f.write("                type: "+type+"\n")
@@ -115,7 +102,6 @@ def main():
 				#WRITING OF THE CONFIGURATION RELATED TO TE INTERNAL CONNECTION POINTS  										
 				if internal_connection_endpoints_subsection!=None:
 					f.write("            internal-connection-point: "+"\n")	
-					
 					for current_endpoint in config[section][current_vdu][internal_connection_endpoints_subsection]:
 						id = current_endpoint
 						name = key_checker(config[section][current_vdu][internal_connection_endpoints_subsection][current_endpoint],'.*name.*|.*nome.*')
@@ -126,8 +112,7 @@ def main():
 						if name!=None:
 							f.write("                name: "+name+"\n")
 						if short_name!=None:
-							f.write("                short-name: "+short_name+"\n")							
-					
+							f.write("                short-name: "+short_name+"\n")								
 	f.close()			
 
 main()

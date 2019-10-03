@@ -15,9 +15,8 @@ from key_checker import *
 
 
 def main():
-	f = open(path_output_files+'/descriptorTest.yaml',"a+")
-		
-	#Lettura del file di configurazione.
+	f = open(path_output_files+'/descriptorTest.yaml',"a+")	
+	#READING OF THE CONFIGURATION FILE
 	config = ConfigObj(path_config_files)
 	#______________________________________
 	#IN THIS PART OF THE SCRIPT WE ARE LOOKING FOR ALL 
@@ -31,6 +30,4 @@ def main():
 			f.write('        mgmt-interface:'+"\n")
 			f.write('            cp: '+management_interface+"\n")
 	f.close()
-
-
 main()

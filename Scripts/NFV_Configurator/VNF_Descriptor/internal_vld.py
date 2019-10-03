@@ -13,7 +13,6 @@ sys.path.insert(0,path_lib)
 from key_checker import *
 
 def main():
-
 	config = ConfigObj(path_config_files)
 	f = open(path_output_files+"/descriptorTest.yaml","a+")
 	#______________________________________
@@ -46,6 +45,5 @@ def main():
 					f.write("            internal-connection-point:"+"\n")
 					for current_point in connection_points:
 						f.write("            -  id-ref: "+current_point+"\n") 
-
 	f.close()
 main()

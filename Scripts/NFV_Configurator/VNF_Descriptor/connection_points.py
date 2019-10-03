@@ -14,7 +14,6 @@ from key_checker import *
 
 
 def main():
-
 	config = ConfigObj(path_config_files)
 	f = open(path_output_files+"/descriptorTest.yaml","a+")
 	#______________________________________
@@ -32,13 +31,10 @@ def main():
 				name = key_checker(options,'.*name.*')
 				short_name = key_checker(options,'.*short.*|.*alias.*')
 				f.write("        -   id: "+cp+"\n") 
-				
 				if name!=None:
 					f.write("            name: "+name+"\n")
 
 				if short_name!=None:
 					f.write("            short_name: "+short_name+"\n")  
-
 	f.close()
-
 main()

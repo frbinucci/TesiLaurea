@@ -14,14 +14,11 @@ sys.path.insert(0,path_lib)
 from key_checker import *
 
 def main():
-
-
 	f = open(path_output_files,"w+")
 	f.close()
 	f = open(path_output_files,"a+")
 	f.write('vnfd:vnfd-catalog:'+"\n")
 	f.write('    vnfd:'+"\n")
-	
 	#READING OF THE CONFIGURATION FILE.
 	config = ConfigObj(path_config_files)
 	#______________________________________
@@ -38,12 +35,9 @@ def main():
 			short_name = key_checker(options,'.*short.*|.*alias.*') 
 			version = key_checker(options,'.*version.*') 
 			logo = key_checker(options,'.*logo.*') 
-
 			description = key_checker(options,'.*desc.*')
-
 			if type(description)==list:
 				description = ",".join(description)
-			
 			if id!=None:
 				f.write("    -   id: "+id+"\n")
 			if name!=None:
@@ -56,9 +50,6 @@ def main():
 				f.write("        logo: "+logo+"\n")
 			if description!=None:
 				print(description)
-				f.write("        description: "+description+"\n")			
-			
+				f.write("        description: "+description+"\n")				
 	f.close()
-
-
 main()
