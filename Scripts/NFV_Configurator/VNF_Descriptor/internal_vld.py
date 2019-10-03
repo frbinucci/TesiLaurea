@@ -26,7 +26,7 @@ def main():
 			f.write("        internal-vld:"+"\n")
 			for current_link in config[section]:
 				options = config[section][current_link]
-				name = key_checker(options,'.*name.*|.*nome.*')
+				name = key_checker(options,'.*name.*')
 				short_name = key_checker(options,'.*short.*|.*alias.*')
 				type = key_checker(options,'.*type.*')
 				connection_points = key_checker(options,'.*points.*')

@@ -31,7 +31,7 @@ def main():
 		if len(general_section)!=0:
 			options = config[section]
 			id = key_checker(options,'.*id.*')
-			name = key_checker(options,'.*name.*|.*nome.*')
+			name = key_checker(options,'.*name.*')
 			short_name = key_checker(options,'.*short.*|.*alias.*') 
 			version = key_checker(options,'.*version.*') 
 			logo = key_checker(options,'.*logo.*') 
